@@ -3,6 +3,7 @@ import { useLanguage } from "@/lib/i18n";
 
 export function Footer() {
   const { t } = useLanguage();
+  const logo = `${import.meta.env.BASE_URL}assets/favicon.jpg`;
 
   return (
     <footer className="py-12 bg-card border-t border-border" data-testid="footer">
@@ -10,7 +11,7 @@ export function Footer() {
         <div className="flex flex-col items-center gap-6">
           <div className="flex items-center gap-3">
             <img
-              src="/assets/favicon.jpg"
+              src={logo}
               alt="Latinos Barbershop Logo"
               className="w-10 h-10 rounded-full object-cover border-2 border-primary"
             />

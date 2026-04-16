@@ -49,6 +49,7 @@ export function Appointment() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const logo = `${import.meta.env.BASE_URL}assets/favicon.jpg`;
 
   const availableDates = getNextWeekDates();
 
@@ -114,7 +115,7 @@ export function Appointment() {
               <CardContent className="p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <img
-                    src="/assets/favicon.jpg"
+                    src={logo}
                     alt="Latinos Barbershop"
                     className="w-12 h-12 rounded-full object-cover border-2 border-primary"
                   />

@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 
 export function Hero() {
   const { t } = useLanguage();
+  const heroBg = `${import.meta.env.BASE_URL}assets/interior-banner.jpg`;
 
   const scrollToAppointment = () => {
     const element = document.getElementById("appointment");
@@ -20,7 +21,7 @@ export function Hero() {
     >
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/assets/interior-banner.jpg')" }}
+        style={{ backgroundImage: `url('${heroBg}')` }}
       />
       <div className="absolute inset-0 bg-black/60" />
       

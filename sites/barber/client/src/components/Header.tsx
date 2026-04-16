@@ -7,6 +7,7 @@ export function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const logo = `${import.meta.env.BASE_URL}assets/favicon.jpg`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +45,7 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center gap-3">
             <img
-              src="/assets/favicon.jpg"
+              src={logo}
               alt="Latinos Barbershop Logo"
               className="w-12 h-12 rounded-full object-cover border-2 border-primary"
               data-testid="img-logo"
