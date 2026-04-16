@@ -20,6 +20,14 @@ npm run serve
 ```
 Then open `http://localhost:4173` for the site list, or jump straight to `http://localhost:4173/barber`, `.../dentist`, etc. Stop the server anytime with `Ctrl+C` or `pkill -f serve.mjs`.
 
+### Local preview with GitHub Pages paths
+If you want local URLs to match how they’ll be hosted on Pages (e.g., `https://<user>.github.io/portfolio/<slug>/`):
+```bash
+BASE_PREFIX=/portfolio ./scripts/build-all.sh
+BASE_PREFIX=/portfolio npm run serve
+# open http://localhost:4173/portfolio/<slug>/
+```
+
 ## Develop a single site
 ```bash
 cd sites/<site>
@@ -33,3 +41,17 @@ BASE_PATH=/barber VITE_BASE_PATH=/barber npm run dev
 
 ## Deploying
 Each built site lives in `sites/<site>/dist/public` and already expects to be served from `/<site>/`. Upload those folders to GitHub Pages (or any static host) under matching paths and everything will resolve correctly.
+
+### GitHub Pages (project site) hints
+- Pages for a repo are served from `https://<user>.github.io/<repo>/…`. Set a base prefix so assets resolve correctly.
+- One-shot export (recommended):
+  ```bash
+  BASE_PREFIX=/portfolio ./scripts/export-gh-pages.sh
+  ```
+  This rebuilds everything with the prefix and stages static files in `docs/<slug>/` plus an index page.
+  Enable GitHub Pages with the **/docs** folder as the source, commit/push, and your sites will be reachable at `https://<user>.github.io/portfolio/<slug>/`.
+- Local preview with the same prefix:
+  ```bash
+  BASE_PREFIX=/portfolio npm run serve
+  # open http://localhost:4173/portfolio/<slug>/
+  ```

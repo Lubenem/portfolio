@@ -16,6 +16,15 @@ const sites = [
   "veterinary",
 ];
 
+const basePrefix = (() => {
+  const raw = process.env.BASE_PREFIX;
+  if (!raw) return "";
+  const trimmed = raw.replace(/^\/|\/$/g, "");
+  return trimmed ? `/${trimmed}` : "";
+})();
+
+const mountPath = (slug) => `${basePrefix}/${slug}`.replace(/\/+/g, "/");
+
 function availableSites() {
   return sites.map((slug) => {
     const dist = path.resolve("sites", slug, "dist/public");
@@ -38,8 +47,9 @@ siteStatus.forEach(({ slug, dist, ready }) => {
     return;
   }
 
-  app.use(`/${slug}`, express.static(dist, { index: false }));
-  app.get([`/${slug}`, `/${slug}/*`], (_req, res) => {
+  const mount = mountPath(slug);
+  app.use(mount, express.static(dist, { index: false }));
+  app.get([mount, `${mount}/*`], (_req, res) => {
     res.sendFile(path.join(dist, "index.html"));
   });
 });
@@ -48,7 +58,8 @@ app.get("/", (_req, res) => {
   const rows = siteStatus
     .map(({ slug, ready }) => {
       const status = ready ? "ready" : "missing build";
-      return `<li><a href="/${slug}">${slug}</a> – ${status}</li>`;
+      const href = `${mountPath(slug)}/`;
+      return `<li><a href="${href}">${href}</a> – ${status}</li>`;
     })
     .join("\n");
 
@@ -65,7 +76,7 @@ app.get("/", (_req, res) => {
   </head>
   <body>
     <h1>Portfolio Sites</h1>
-    <p>Built sites are served under their slug. Missing ones need <code>npm run build</code>.</p>
+    <p>Built sites are served under <code>${basePrefix || "/"}</code> + slug. Missing ones need <code>npm run build</code>.</p>
     <ul>${rows}</ul>
   </body>
 </html>`);
