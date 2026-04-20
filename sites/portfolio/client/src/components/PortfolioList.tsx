@@ -37,7 +37,7 @@ export function PortfolioList() {
               >
                 <div className="aspect-[4/3] bg-muted relative overflow-hidden">
                   <img
-                    src={`${base}portfolio/${site.slug}.png`}
+                    src={`${base}${site.slug}.png`}
                     alt={`${site.name} preview`}
                     loading="lazy"
                     className="absolute inset-0 h-full w-full object-cover"

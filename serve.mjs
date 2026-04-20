@@ -49,6 +49,9 @@ siteStatus.forEach(({ slug, dist, ready }) => {
   }
 
   const mounts = slug === "portfolio" ? [baseRoot, mountPath(slug)] : [mountPath(slug)];
+  if (!basePrefix && slug !== "portfolio") {
+    mounts.push(`/portfolio/${slug}`);
+  }
 
   mounts.forEach((mount) => {
     app.use(mount, express.static(dist, { index: false }));
