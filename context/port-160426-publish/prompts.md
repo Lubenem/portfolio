@@ -71,3 +71,12 @@ but our new site items list, pops up simply..
 could we align our site items list to the old flow of the site?
 
 2. also when I click on a demo site element, I want to be redirected to a new tab, please change current behavior of opening the demo straight in the same tab
+
+##
+
+Ok, it seems like we are done with the UI fixes, Now I want to publish/host our project (with all of it subsites) on github 
+
+[docs](~/projects/portfolio/docs)
+- as I understood, the github pages should use this folder, but it seems like our latest UI fixes didn't affect this folder (I checked git) 
+
+care to explain?

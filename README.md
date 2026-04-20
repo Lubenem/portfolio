@@ -43,15 +43,17 @@ BASE_PATH=/barber VITE_BASE_PATH=/barber npm run dev
 Each built site lives in `sites/<site>/dist/public` and already expects to be served from `/<site>/`. Upload those folders to GitHub Pages (or any static host) under matching paths and everything will resolve correctly.
 
 ### GitHub Pages (project site) hints
-- Pages for a repo are served from `https://<user>.github.io/<repo>/…`. Set a base prefix so assets resolve correctly.
+- Pages for a repo are served from `https://<user>.github.io/<repo>/…`. Because the repo name is part of the URL, a base prefix is required so assets/routes resolve correctly.
 - One-shot export (recommended):
   ```bash
-  BASE_PREFIX=/portfolio ./scripts/export-gh-pages.sh
+  ./scripts/export-gh-pages.sh
   ```
-  This rebuilds everything with the prefix and stages static files in `docs/<slug>/` plus an index page.
-  Enable GitHub Pages with the **/docs** folder as the source, commit/push, and your sites will be reachable at `https://<user>.github.io/portfolio/<slug>/`.
+  The script auto-detects the repo name and uses it as `BASE_PREFIX` (for this repo: `/portfolio`), then rebuilds and stages files into `docs/`.
+  `portfolio` is exported as the default root app (`https://<user>.github.io/portfolio/`), and niche demos are exported under `https://<user>.github.io/portfolio/<slug>/`.
+  Enable GitHub Pages with the **/docs** folder as the source, then commit/push.
 - Local preview with the same prefix:
   ```bash
   BASE_PREFIX=/portfolio npm run serve
-  # open http://localhost:4173/portfolio/<slug>/
+  # open http://localhost:4173/portfolio/ (portfolio app)
+  # demos: http://localhost:4173/portfolio/<slug>/
   ```
